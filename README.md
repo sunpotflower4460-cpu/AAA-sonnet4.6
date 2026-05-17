@@ -66,6 +66,7 @@
 | **Phase 1** | README/docsに設計を入れる | しない |
 | **Phase 2** | 監査フェーズ（設計確認・微修正） | しない |
 | **Phase 3** | MVPまで一気に作る | MVP完成後のみ |
+| **Phase 4** | デバッグ・UI微調整・デプロイ準備 ✅ **完了** | ビルド成功確認済み |
 
 詳細は [docs/development-phases.md](docs/development-phases.md) を参照。
 
@@ -109,7 +110,7 @@ npm run preview
 
 ## Cloudflare Pages デプロイ方針
 
-MVP完成後、以下の設定でCloudflare Pagesにデプロイできます。
+MVP完成・Phase 4最終調整済み。以下の設定でCloudflare Pagesにデプロイできます。
 
 | 設定 | 値 |
 |------|-----|
@@ -117,7 +118,17 @@ MVP完成後、以下の設定でCloudflare Pagesにデプロイできます。
 | Build output directory | `dist` |
 | Node.js version | 18以上推奨 |
 
-**重要：** Phase 3途中ではデプロイしません。MVP完成・ビルド成功後のみ対応します。
+**Cloudflare Pages 接続手順：**
+
+1. [Cloudflare Pages ダッシュボード](https://dash.cloudflare.com/) にログイン
+2. 「Workers & Pages」→「Create」→「Pages」→「Connect to Git」
+3. このリポジトリを選択
+4. ビルド設定を入力（上記の通り）
+5. 「Save and Deploy」→ `*.pages.dev` URLが発行される
+
+詳細は [docs/final-polish-and-deploy-phase-4.md](docs/final-polish-and-deploy-phase-4.md) を参照。
+
+**重要：** Phase 4でビルド確認済み。接続後すぐにデプロイ可能です。
 
 ---
 
@@ -154,4 +165,5 @@ src/
 | [docs/design-system.md](docs/design-system.md) | UI/UXとデザインシステム |
 | [docs/mvp-spec.md](docs/mvp-spec.md) | MVP仕様 |
 | [docs/development-phases.md](docs/development-phases.md) | 開発フェーズ |
+| [docs/final-polish-and-deploy-phase-4.md](docs/final-polish-and-deploy-phase-4.md) | Phase 4 デバッグ・調整・デプロイ報告 |
 | [.github/copilot-instructions.md](.github/copilot-instructions.md) | Cloud Agent / Copilot向け作業ルール |

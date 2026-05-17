@@ -34,7 +34,7 @@ export function NotesList({
   const noResults = !isEmpty && sorted.length === 0;
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex-1 flex flex-col">
       {/* Header */}
       <div className="px-[21px] pt-[34px] pb-[21px]">
         <h1 className="font-mincho text-[21px] text-sumi leading-tight mb-[4px]">
