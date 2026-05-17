@@ -79,6 +79,73 @@
 
 ---
 
+## セットアップ / Setup
+
+```bash
+npm install
+```
+
+## 開発起動 / Development
+
+```bash
+npm run dev
+```
+
+ブラウザで `http://localhost:5173` を開いてください。
+
+## ビルド / Build
+
+```bash
+npm run build
+```
+
+ビルド成果物は `dist/` に生成されます。
+
+## プレビュー / Preview
+
+```bash
+npm run preview
+```
+
+## Cloudflare Pages デプロイ方針
+
+MVP完成後、以下の設定でCloudflare Pagesにデプロイできます。
+
+| 設定 | 値 |
+|------|-----|
+| Build command | `npm run build` |
+| Build output directory | `dist` |
+| Node.js version | 18以上推奨 |
+
+**重要：** Phase 3途中ではデプロイしません。MVP完成・ビルド成功後のみ対応します。
+
+---
+
+## ディレクトリ構成 / Structure
+
+```
+src/
+  App.tsx           # ルートコンポーネント・状態管理
+  main.tsx          # エントリーポイント
+  index.css         # グローバルスタイル・デザイントークン
+  types/
+    note.ts         # Noteデータ型
+  lib/
+    storage.ts      # localStorage読み書き
+    date.ts         # 日付フォーマット（今日/昨日/YYYY/MM/DD）
+    i18n.ts         # UI文言（日本語メイン・英語サブ）
+  components/
+    AppShell.tsx    # 最大幅コンテナ
+    NotesList.tsx   # メモ一覧 + FAB
+    NoteCard.tsx    # メモカード（刀ライン・お気に入り）
+    NoteEditor.tsx  # タイトル/本文入力 + 自動保存
+    SearchBar.tsx   # 検索バー
+    EmptyState.tsx  # 空状態UI（円相モチーフ）
+    ZanshinMark.tsx # 円相SVGマーク
+```
+
+---
+
 ## ドキュメント
 
 | ファイル | 内容 |
