@@ -26,7 +26,7 @@ The goal is to make writing feel **quiet, spacious, and intentional**.
 
 ## Phase Rules
 
-### Phase 1 (Current)
+### Phase 1 (Complete)
 
 - ✅ Work on README and docs only
 - ✅ Establish design, concept, MVP scope, and development rules
@@ -34,12 +34,14 @@ The goal is to make writing feel **quiet, spacious, and intentional**.
 - ❌ Do not deploy to Cloudflare Pages
 - ❌ Do not start MVP implementation
 
-### Phase 2
+### Phase 2 (Current)
 
 - ✅ Audit the design from Phase 1
 - ✅ Create `docs/audit-phase-2.md`
+- ✅ Fix inconsistencies and gaps in design documents
 - ❌ Do not deploy
-- ❌ Do not overbuild
+- ❌ Do not start MVP implementation
+- ❌ Do not add React components or app code
 
 ### Phase 3
 
@@ -107,6 +109,17 @@ If a feature makes the app:
 - Not a social app
 - Not a Japanese theme park
 - Not a clone of Notion, Bear, or Obsidian
+
+---
+
+## Features Never to Add (at any phase without explicit instruction)
+
+- **Login / authentication** — Zanshin is a personal, local-first app
+- **Cloud sync** — local storage is the MVP foundation; sync is a future optional phase
+- **AI features** — AI assistance conflicts with the stillness-first philosophy
+- **Payment / subscription** — out of scope until explicitly requested
+- **Push notifications** — interruption is antithetical to 残心
+- **Social / sharing features** — the writing space is private and personal
 
 ---
 

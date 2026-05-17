@@ -25,9 +25,9 @@
 
 **海外向け**
 
-- Japanese minimalism / Zen / Wabi-sabi
-- Samurai-inspired calm focus
-- Mindful writing / Calm journaling
+- Japanese minimalism / Zen-inspired writing / Wabi-sabi
+- Write with stillness / Calm journaling
+- Mindful notes / Quiet focus
 
 ---
 
