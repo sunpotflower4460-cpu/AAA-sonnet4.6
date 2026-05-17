@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-washi: #F7F1E5;
+  --color-paper: #FBF8F1;
+  --color-sumi: #1F1B18;
+  --color-ink-muted: #5F5750;
+  --color-gold: #C9A646;
+  --color-indigo: #243B53;
+  --color-vermilion: #B14A36;
+  --color-line: rgba(31, 27, 24, 0.12);
+  --color-shadow: rgba(31, 27, 24, 0.08);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--color-washi);
+  color: var(--color-sumi);
+  font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+textarea, input {
+  font-family: inherit;
+}
+
+/* Safe area support for iPhone */
+.safe-bottom {
+  padding-bottom: max(21px, env(safe-area-inset-bottom));
+}
+
+.safe-top {
+  padding-top: max(13px, env(safe-area-inset-top));
+}
