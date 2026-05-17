@@ -5,12 +5,15 @@ interface AppShellProps {
 export function AppShell({ children }: AppShellProps) {
   return (
     <div
-      className="min-h-screen w-full"
-      style={{ backgroundColor: 'var(--color-washi)' }}
+      className="w-full"
+      style={{
+        backgroundColor: 'var(--color-washi)',
+        minHeight: '100dvh',
+      }}
     >
       <div
-        className="mx-auto relative min-h-screen flex flex-col"
-        style={{ maxWidth: '720px' }}
+        className="mx-auto relative flex flex-col"
+        style={{ maxWidth: '720px', minHeight: '100dvh' }}
       >
         {children}
       </div>

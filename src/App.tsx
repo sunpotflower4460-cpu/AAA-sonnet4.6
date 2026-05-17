@@ -14,11 +14,8 @@ export default function App() {
   const [activeNoteId, setActiveNoteId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const persistNotes = useCallback((updated: Note[]) => {
-    setNotes(updated);
-    saveNotes(updated);
-  }, []);
-
+  // Use functional setState so these callbacks are stable (no notes dep),
+  // preventing the infinite auto-save loop in NoteEditor.
   const handleCreateNote = useCallback(() => {
     const now = new Date().toISOString();
     const newNote: Note = {
@@ -29,27 +26,30 @@ export default function App() {
       updatedAt: now,
       isFavorite: false,
     };
-    const updated = [newNote, ...notes];
-    persistNotes(updated);
+    setNotes((prev) => {
+      const updated = [newNote, ...prev];
+      saveNotes(updated);
+      return updated;
+    });
     setActiveNoteId(newNote.id);
-  }, [notes, persistNotes]);
+  }, []);
 
-  const handleUpdateNote = useCallback(
-    (updated: Note) => {
-      const newNotes = notes.map((n) => (n.id === updated.id ? updated : n));
-      persistNotes(newNotes);
-    },
-    [notes, persistNotes]
-  );
+  const handleUpdateNote = useCallback((updated: Note) => {
+    setNotes((prev) => {
+      const newNotes = prev.map((n) => (n.id === updated.id ? updated : n));
+      saveNotes(newNotes);
+      return newNotes;
+    });
+  }, []);
 
-  const handleDeleteNote = useCallback(
-    (id: string) => {
-      const newNotes = notes.filter((n) => n.id !== id);
-      persistNotes(newNotes);
-      setActiveNoteId(null);
-    },
-    [notes, persistNotes]
-  );
+  const handleDeleteNote = useCallback((id: string) => {
+    setNotes((prev) => {
+      const newNotes = prev.filter((n) => n.id !== id);
+      saveNotes(newNotes);
+      return newNotes;
+    });
+    setActiveNoteId(null);
+  }, []);
 
   const activeNote = activeNoteId ? notes.find((n) => n.id === activeNoteId) ?? null : null;
 
@@ -57,6 +57,7 @@ export default function App() {
     <AppShell>
       {activeNote ? (
         <NoteEditor
+          key={activeNote.id}
           note={activeNote}
           onUpdate={handleUpdateNote}
           onDelete={handleDeleteNote}

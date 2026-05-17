@@ -17,13 +17,20 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const statusTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
+  // Keep a ref to the note so triggerSave doesn't need note in its dep array.
+  // Without this, every save would update the note prop → new triggerSave ref →
+  // useEffect re-runs → infinite save loop.
+  const noteRef = useRef(note);
+  useEffect(() => {
+    noteRef.current = note;
+  });
 
   const triggerSave = useCallback(
     (newTitle: string, newBody: string, newFavorite: boolean) => {
       if (saveTimer.current) clearTimeout(saveTimer.current);
       saveTimer.current = setTimeout(() => {
         const updated: Note = {
-          ...note,
+          ...noteRef.current,
           title: newTitle,
           body: newBody,
           isFavorite: newFavorite,
@@ -35,7 +42,7 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
         statusTimer.current = setTimeout(() => setSaveStatus('idle'), 2000);
       }, 600);
     },
-    [note, onUpdate]
+    [onUpdate]
   );
 
   useEffect(() => {
@@ -61,7 +68,7 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex-1 flex flex-col">
       {/* Header */}
       <div
         className="flex items-center justify-between px-[21px] py-[13px] border-b"
