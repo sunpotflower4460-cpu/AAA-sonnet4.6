@@ -2,16 +2,17 @@ interface ZanshinMarkProps {
   size?: number;
   opacity?: number;
   className?: string;
+  animate?: boolean;
 }
 
-export function ZanshinMark({ size = 89, opacity = 0.08, className = '' }: ZanshinMarkProps) {
+export function ZanshinMark({ size = 89, opacity = 0.08, className = '', animate = false }: ZanshinMarkProps) {
   return (
     <svg
       width={size}
       height={size}
       viewBox="0 0 89 89"
       fill="none"
-      className={className}
+      className={`${animate ? 'animate-breathe' : ''} ${className}`}
       aria-hidden="true"
     >
       <circle

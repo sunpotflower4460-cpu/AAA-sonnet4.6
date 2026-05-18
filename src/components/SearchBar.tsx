@@ -19,12 +19,15 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
           bg-paper
           border border-[var(--color-line)]
           rounded-[4px]
-          px-[13px] py-[8px]
-          text-[15px] text-sumi
+          px-[13px] py-[10px]
+          text-[14px] text-sumi
           placeholder:text-ink-muted
-          focus:outline-none focus:border-[var(--color-ink-muted)]
-          transition-colors duration-200
+          focus:outline-none
+          focus:border-[var(--color-ink-muted)]
+          focus:bg-[var(--color-paper)]
+          transition-colors duration-300
         "
+        style={{ letterSpacing: '0.01em' }}
       />
     </div>
   );

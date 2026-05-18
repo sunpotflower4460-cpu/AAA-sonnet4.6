@@ -36,12 +36,28 @@ export function NotesList({
   return (
     <div className="flex-1 flex flex-col">
       {/* Header */}
-      <div className="px-[21px] pt-[34px] pb-[21px]">
-        <h1 className="font-mincho text-[21px] text-sumi leading-tight mb-[4px]">
+      <div className="px-[21px] pt-[55px] pb-[21px]">
+        <p
+          className="text-[11px] mb-[8px]"
+          style={{
+            color: 'var(--color-ink-muted)',
+            opacity: 0.6,
+            letterSpacing: '0.18em',
+            textTransform: 'uppercase',
+          }}
+        >
+          {copy.appSubtitle}
+        </p>
+        <h1
+          className="font-mincho text-[38px] text-sumi leading-none mb-[13px]"
+          style={{ letterSpacing: '-0.01em' }}
+        >
           {copy.appName}
         </h1>
-        <p className="text-[12px] text-ink-muted mb-[4px]">{copy.appSubtitle}</p>
-        <p className="text-[13px] text-ink-muted leading-golden mb-[21px]">
+        <p
+          className="text-[13px] text-ink-muted mb-[34px]"
+          style={{ opacity: 0.75, fontStyle: 'italic', lineHeight: '1.618' }}
+        >
           {copy.taglineEn}
         </p>
         <SearchBar value={searchQuery} onChange={onSearchChange} />
@@ -54,11 +70,12 @@ export function NotesList({
         ) : noResults ? (
           <EmptyState onCreateNote={onCreateNote} isSearching />
         ) : (
-          <div className="flex flex-col gap-[13px]">
-            {sorted.map((note) => (
+          <div className="flex flex-col gap-[10px]">
+            {sorted.map((note, index) => (
               <NoteCard
                 key={note.id}
                 note={note}
+                animationIndex={index}
                 onClick={() => onSelectNote(note.id)}
               />
             ))}
@@ -71,20 +88,19 @@ export function NotesList({
         onClick={onCreateNote}
         aria-label={copy.newNote}
         className="
-          fixed bottom-[34px] right-[21px]
+          fixed
           w-[55px] h-[55px]
           bg-indigo text-paper
           rounded-full
           flex items-center justify-center
-          text-[24px]
-          shadow-md
-          hover:scale-105 active:scale-95
-          transition-transform duration-200
-          safe-bottom
+          text-[22px]
+          hover:opacity-90 active:scale-[0.93]
+          transition-all duration-200
         "
         style={{
+          right: '21px',
           bottom: 'max(34px, calc(34px + env(safe-area-inset-bottom)))',
-          boxShadow: '0 4px 16px var(--color-shadow)',
+          boxShadow: '0 4px 20px rgba(36, 59, 83, 0.28)',
         }}
       >
         ＋
