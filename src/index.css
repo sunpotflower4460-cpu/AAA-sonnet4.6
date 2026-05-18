@@ -10,9 +10,49 @@
   --color-gold: #C9A646;
   --color-indigo: #243B53;
   --color-vermilion: #B14A36;
-  --color-line: rgba(31, 27, 24, 0.12);
-  --color-shadow: rgba(31, 27, 24, 0.08);
+  --color-line: rgba(31, 27, 24, 0.10);
+  --color-shadow: rgba(31, 27, 24, 0.06);
+  --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
+
+/* ── Animations ───────────────────────────────────── */
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes breathe {
+  0%, 100% { opacity: 0.08; transform: scale(1); }
+  50%       { opacity: 0.14; transform: scale(1.06); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.animate-fade-slide-up {
+  animation: fadeSlideUp 420ms var(--ease-soft) both;
+}
+
+.animate-breathe {
+  animation: breathe 5s ease-in-out infinite;
+}
+
+/* Staggered card delays */
+.card-delay-0 { animation-delay:   0ms; }
+.card-delay-1 { animation-delay:  50ms; }
+.card-delay-2 { animation-delay: 100ms; }
+.card-delay-3 { animation-delay: 150ms; }
+.card-delay-4 { animation-delay: 200ms; }
+.card-delay-5 { animation-delay: 250ms; }
+.card-delay-6 { animation-delay: 300ms; }
+.card-delay-7 { animation-delay: 350ms; }
+.card-delay-8 { animation-delay: 400ms; }
+.card-delay-9 { animation-delay: 450ms; }
+
+/* ── Base ─────────────────────────────────────────── */
 
 * {
   -webkit-tap-highlight-color: transparent;
@@ -20,6 +60,10 @@
 
 body {
   background-color: var(--color-washi);
+  /* Subtle warm depth — no grain, just a soft atmospheric glow */
+  background-image:
+    radial-gradient(ellipse at 18% 88%, rgba(201, 166, 70, 0.06) 0%, transparent 56%),
+    radial-gradient(ellipse at 82% 12%, rgba(36, 59, 83, 0.05) 0%, transparent 56%);
   color: var(--color-sumi);
   font-family: "Hiragino Sans", "Noto Sans JP", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,9 +71,21 @@ body {
 
 textarea, input {
   font-family: inherit;
+  caret-color: var(--color-indigo);
 }
 
-/* Safe area support for iPhone */
+/* Selection */
+::selection {
+  background-color: rgba(36, 59, 83, 0.13);
+  color: var(--color-sumi);
+}
+
+/* Scrollbar — minimal, barely visible */
+::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 2px; }
+
+/* ── Safe area support for iPhone ────────────────── */
 .safe-bottom {
   padding-bottom: max(21px, env(safe-area-inset-bottom));
 }

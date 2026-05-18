@@ -39,7 +39,7 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
         onUpdate(updated);
         setSaveStatus('saved');
         if (statusTimer.current) clearTimeout(statusTimer.current);
-        statusTimer.current = setTimeout(() => setSaveStatus('idle'), 2000);
+        statusTimer.current = setTimeout(() => setSaveStatus('idle'), 2200);
       }, 600);
     },
     [onUpdate]
@@ -68,39 +68,52 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
   };
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col animate-fade-slide-up">
       {/* Header */}
       <div
-        className="flex items-center justify-between px-[21px] py-[13px] border-b"
-        style={{ borderColor: 'var(--color-line)' }}
+        className="flex items-center justify-between px-[21px] py-[13px]"
+        style={{ borderBottom: '1px solid var(--color-line)' }}
       >
+        {/* Back */}
         <button
           onClick={onBack}
           aria-label={copy.backButton}
-          className="text-[14px] text-ink-muted hover:text-sumi transition-colors duration-200 py-[8px] pr-[13px]"
+          className="
+            flex items-center gap-[6px]
+            text-[13px] text-ink-muted
+            hover:text-sumi
+            active:opacity-70
+            transition-colors duration-200
+            py-[8px] pr-[13px]
+          "
+          style={{ letterSpacing: '0.02em' }}
         >
-          ← {copy.backButton}
+          <span style={{ fontSize: '16px', lineHeight: 1 }}>←</span>
+          <span>{copy.backButton}</span>
         </button>
 
-        <div className="flex items-center gap-[13px]">
+        <div className="flex items-center gap-[8px]">
           {/* Save status */}
           <span
-            className="text-[12px] transition-opacity duration-500"
+            className="text-[11px] transition-opacity duration-500"
             style={{
               color: 'var(--color-ink-muted)',
-              opacity: saveStatus === 'saved' ? 1 : 0,
+              opacity: saveStatus === 'saved' ? 0.7 : 0,
+              letterSpacing: '0.04em',
             }}
           >
             {copy.saved}
           </span>
-
-          {/* Favorite button */}
           <button
             onClick={handleFavoriteToggle}
             aria-label={copy.favoriteToggle}
             aria-pressed={isFavorite}
-            className="text-[20px] transition-all duration-300 py-[8px] px-[4px]"
-            style={{ color: isFavorite ? 'var(--color-gold)' : 'var(--color-line)' }}
+            className="py-[8px] px-[6px] transition-all duration-350"
+            style={{
+              color: isFavorite ? 'var(--color-gold)' : 'var(--color-line)',
+              fontSize: '18px',
+              transform: isFavorite ? 'scale(1.1)' : 'scale(1)',
+            }}
           >
             ◆
           </button>
@@ -109,8 +122,8 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
           <button
             onClick={handleDelete}
             aria-label={copy.deleteButton}
-            className="text-[13px] py-[8px] px-[4px] transition-colors duration-200"
-            style={{ color: 'var(--color-vermilion)', opacity: 0.8 }}
+            className="text-[12px] py-[8px] px-[6px] transition-colors duration-200 hover:opacity-100"
+            style={{ color: 'var(--color-vermilion)', opacity: 0.65 }}
           >
             {copy.deleteButton}
           </button>
@@ -118,7 +131,7 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
       </div>
 
       {/* Editor body */}
-      <div className="flex-1 flex flex-col overflow-y-auto px-[21px] pt-[34px] pb-[34px]">
+      <div className="flex-1 flex flex-col overflow-y-auto px-[26px] pt-[42px] pb-[55px]">
         {/* Title */}
         <input
           type="text"
@@ -130,16 +143,22 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
             w-full
             bg-transparent
             border-none outline-none
-            font-mincho text-[21px] text-sumi
-            placeholder:text-ink-muted placeholder:opacity-50
-            mb-[21px]
+            font-mincho text-[24px] text-sumi
+            placeholder:text-ink-muted placeholder:opacity-40
+            mb-[26px]
           "
+          style={{ letterSpacing: '-0.01em', lineHeight: '1.3' }}
         />
 
-        {/* Divider */}
+        {/* Divider — brush-stroke style */}
         <div
-          className="w-[34px] h-[1px] mb-[21px]"
-          style={{ backgroundColor: 'var(--color-line)' }}
+          className="mb-[26px]"
+          style={{
+            width: '42px',
+            height: '1px',
+            backgroundColor: 'var(--color-line)',
+            opacity: 0.8,
+          }}
         />
 
         {/* Body */}
@@ -154,11 +173,11 @@ export function NoteEditor({ note, onUpdate, onDelete, onBack }: NoteEditorProps
             w-full
             bg-transparent
             border-none outline-none resize-none
-            text-[16px] text-sumi leading-golden
-            placeholder:text-ink-muted placeholder:opacity-50
+            text-[16px] text-sumi
+            placeholder:text-ink-muted placeholder:opacity-40
             min-h-[300px]
           "
-          style={{ lineHeight: '1.618' }}
+          style={{ lineHeight: '1.85', letterSpacing: '0.01em' }}
         />
       </div>
     </div>
